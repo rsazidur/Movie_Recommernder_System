@@ -19,22 +19,18 @@ def recommend(movie):
     recommended_movies_posters = []
     for i in movies_list:
         movie_id = movies.iloc[i[0]].movie_id
-        # fetch poster from API
         recommended_movies.append(movies.iloc[i[0]].title)
         recommended_movies_posters.append(fetch_poster(movie_id))
     return recommended_movies, recommended_movies_posters
 
-
-# Load movie data and similarity matrix
 movies_dict = pickle.load(open('movies_dict.pkl', 'rb'))
 movies = pd.DataFrame(movies_dict)
 
 similarity = pickle.load(open('similarity.pkl', 'rb'))
 
-# Streamlit app layout
 st.title("Movie Recommender System")
 
-# Dropdown for selecting movie
+
 selected_movie_name = st.selectbox(
     'Type or select a movie name from the dropdown',
     movies['title'].values)
